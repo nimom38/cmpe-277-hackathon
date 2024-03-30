@@ -15,7 +15,7 @@ Kushal Sai Vema - 017471376<br/>
 * Should be able to render time series
 * Menu Select
 * Annotation Support
-* Chatbot that answers questions regarding the budget based on preset data
+* GPT powered AI Chatbot that answers questions regarding the budget based on preset data
 
 # Demo
 
