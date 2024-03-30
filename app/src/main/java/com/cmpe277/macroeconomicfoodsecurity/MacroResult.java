@@ -47,6 +47,8 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
     String ieflow="";
 
     private static final String SHARED_PREFS_KEY = "notes-macro";
+    private static final String SHARED_PREFS_KEY_USER = "user_type";
+
 
     private EditText noteEditText;
 
@@ -72,11 +74,17 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
 
         apply = (Button) findViewById(R.id.apply);
         apply.setOnClickListener(this);
-
         annotation = (Button) findViewById(R.id.annotation);
         annotationShow = (Button) findViewById(R.id.annotationShow);
         annotation.setOnClickListener(this);
         annotationShow.setOnClickListener(this);
+
+        if(!getUserType(this).equals("researcher")){
+            annotation.setVisibility(View.GONE);
+//            annotationShow.setVisibility(View.GONE);
+        }
+
+
 
 
 
@@ -368,5 +376,11 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
         } else {
             Toast.makeText(this, "No notes found", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    // Method to get the user type
+    public static String getUserType(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_KEY_USER, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(SHARED_PREFS_KEY_USER, "researcher");
     }
 }

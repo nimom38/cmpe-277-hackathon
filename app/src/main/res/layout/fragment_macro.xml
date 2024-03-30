@@ -27,7 +27,7 @@
         android:layout_marginTop="116dp"
         android:fontFamily="monospace"
         android:foregroundTint="#E91E63"
-        android:text="MACROECONOIC (USD)"
+        android:text="MACROECONOMIC (USD)"
         android:textColor="#8E3E9C"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"

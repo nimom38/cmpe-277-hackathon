@@ -12,7 +12,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Trade"
+            android:text="DEBT"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#673AB7"
             android:textSize="24sp"

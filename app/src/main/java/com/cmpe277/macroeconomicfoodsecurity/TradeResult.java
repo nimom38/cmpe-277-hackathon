@@ -46,6 +46,8 @@ public class TradeResult extends AppCompatActivity implements AdapterView.OnItem
     String totalDebt="";
     String gni_curr="";
 
+    private static final String SHARED_PREFS_KEY_USER = "user_type";
+
     private static final String SHARED_PREFS_KEY = "notes-trade";
 
 
@@ -75,6 +77,11 @@ public class TradeResult extends AppCompatActivity implements AdapterView.OnItem
         annotationShow = (Button) findViewById(R.id.annotationShow);
         annotation.setOnClickListener(this);
         annotationShow.setOnClickListener(this);
+
+        if(!getUserType(this).equals("researcher")){
+            annotation.setVisibility(View.GONE);
+//            annotationShow.setVisibility(View.GONE);
+        }
 
         Spinner spinnerLanguages = findViewById(R.id.spinner_country);
         ArrayAdapter adapter = new ArrayAdapter(
@@ -304,5 +311,10 @@ public class TradeResult extends AppCompatActivity implements AdapterView.OnItem
         } else {
             Toast.makeText(this, "No notes found", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static String getUserType(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREFS_KEY_USER, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(SHARED_PREFS_KEY_USER, "researcher");
     }
 }
