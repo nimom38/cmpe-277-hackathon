@@ -7,29 +7,31 @@
 
     <EditText
         android:id="@+id/userInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your message here"/>
+        android:layout_width="384dp"
+        android:layout_height="69dp"
+        android:hint="Enter your message here" />
 
     <Button
         android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send"
-        android:layout_gravity="end"/>
+        android:layout_gravity="end"
+        android:background="@android:color/holo_green_light"
+        android:text="Send" />
 
     <TextView
         android:id="@+id/chatResponse"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"/>
+        android:layout_height="92dp"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/attachPdfButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Attach PDF"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:background="#F85E2D"
+        android:text="Attach PDF" />
 
 
 </LinearLayout>
