@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -43,6 +44,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
     String datasheet ="https://docs.google.com/spreadsheets/d/1hkPHIxzebksd6abBINt00IN-sYjCLOSx0sfE7KK4LIA/gviz/tq?tqx=out:csv&sheet=hackathonData";
     String[] links = {datasheet};
 
+    private static final String SHARED_PREFS_KEY_USER = "user_type";
+    private static final String USER_TYPE_RESEARCHER = "researcher";
+    private static final String USER_TYPE_OFFICIAL = "official";
+
 
 
     private static final String ARG_PARAM1 = "param1";
@@ -73,6 +78,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        Button researcherButton = getActivity().findViewById(R.id.user);
+        Button officialButton = getActivity().findViewById(R.id.officer);
+//
+//        researcherButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setUserType(USER_TYPE_RESEARCHER);
+//            }
+//        });
+//
+//        officialButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setUserType(USER_TYPE_OFFICIAL);
+//            }
+//        });
     }
 
     @Override
@@ -80,14 +102,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        addToDatabase = (Button) rootView.findViewById(R.id.saveToDB);
-        addToDatabase.setOnClickListener(this);
+//        addToDatabase = (Button) rootView.findViewById(R.id.saveToDB);
+//        addToDatabase.setOnClickListener(this);
 
          reseacher = (ImageButton) rootView.findViewById(R.id.user);
         reseacher.setOnClickListener(this);
 
          officer = (ImageButton) rootView.findViewById(R.id.officer);
          officer.setOnClickListener(this);
+
+
          final Context context = getContext();
 
          controller = new DBController(getContext());
@@ -110,27 +134,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         int id = v.getId();
 
         switch (id){
-            case R.id.saveToDB:
-                Log.i("MacroResult","After press on upload");
-
-                Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
-                //fileintent.setType("text/csv");
-                fileintent.addCategory(Intent.CATEGORY_OPENABLE);
-                fileintent.setType("*/*");
-                Log.i("MacroResult","After file intent");
-
-                try {
-                    startActivityForResult(fileintent, requestcode);
-                } catch (ActivityNotFoundException e) {
-                    System.out.println("No activity can handle picking a file. Showing alternatives.");
-                }
-
-                break;
+//            case R.id.saveToDB:
+//                Log.i("MacroResult","After press on upload");
+//
+//                Intent fileintent = new Intent(Intent.ACTION_GET_CONTENT);
+//                //fileintent.setType("text/csv");
+//                fileintent.addCategory(Intent.CATEGORY_OPENABLE);
+//                fileintent.setType("*/*");
+//                Log.i("MacroResult","After file intent");
+//
+//                try {
+//                    startActivityForResult(fileintent, requestcode);
+//                } catch (ActivityNotFoundException e) {
+//                    System.out.println("No activity can handle picking a file. Showing alternatives.");
+//                }
+//
+//                break;
             case R.id.user:
                 persona ="researcher";
+                setUserType(USER_TYPE_RESEARCHER);
+
                 break;
             case R.id.officer:
                 persona ="officer";
+                setUserType(USER_TYPE_OFFICIAL);
+
                 break;
         }
 
@@ -259,5 +287,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
                     Toast.makeText(getContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
                 }
         }
+    }
+    private void setUserType(String userType) {
+        // Store the selected user type in SharedPreferences
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS_KEY_USER, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(SHARED_PREFS_KEY_USER, userType);
+        editor.apply();
+        Toast.makeText(getContext(), "User Changed to: "+userType, Toast.LENGTH_LONG).show();
     }
 }
