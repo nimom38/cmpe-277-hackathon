@@ -25,6 +25,7 @@
         app:layout_constraintVertical_bias="0.024"
         tools:ignore="MissingConstraints" />
 
+
     <Button
         android:id="@+id/saveToDB"
         android:layout_width="wrap_content"
@@ -113,6 +114,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton2"
         tools:ignore="UnknownId" />
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
