@@ -10,6 +10,7 @@ Kushal Sai Vema - 017471376<br/>
 
 # Application Requirement
 
+* Use app as researcher or government official
 * Country selector 
 * Should be able to render time series
 * Menu Select
