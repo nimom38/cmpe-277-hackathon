@@ -33,10 +33,10 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="168dp"
-            android:layout_marginTop="132dp"
+            android:layout_width="49dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="176dp"
+            android:layout_marginTop="128dp"
             android:fontFamily="monospace"
             android:foregroundTint="#E91E63"
             android:text="TRADE"
@@ -47,10 +47,10 @@
 
         <CheckBox
             android:id="@+id/reserve"
-            android:layout_width="133dp"
+            android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-black"
             android:onClick="onCheckboxClicked"
             android:text="Reserve"
@@ -59,10 +59,10 @@
 
         <CheckBox
             android:id="@+id/gni"
-            android:layout_width="131dp"
+            android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-black"
             android:onClick="onCheckboxClicked"
             android:text="GNI"
@@ -71,10 +71,10 @@
 
         <CheckBox
             android:id="@+id/tdbt"
-            android:layout_width="134dp"
+            android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-black"
             android:onClick="onCheckboxClicked"
             android:text="Total Debt"
@@ -83,10 +83,10 @@
 
         <CheckBox
             android:id="@+id/gni_curr"
-            android:layout_width="135dp"
+            android:layout_width="130dp"
             android:layout_height="48dp"
-            android:layout_marginStart="124dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-black"
             android:onClick="onCheckboxClicked"
             android:text="GNI Current (US$)"
@@ -97,15 +97,16 @@
             android:id="@+id/tradeShow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_bright"
+            android:background="@color/teal_700"
             android:onClick="showData"
             android:text="SHOW"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.843" />
+            app:layout_constraintVertical_bias="0.844" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

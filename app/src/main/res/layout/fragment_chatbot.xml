@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:background="@android:color/holo_green_light"
+        android:background="@color/purple_200"
         android:text="Send" />
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="#F85E2D"
+        android:background="#C54EF1"
         android:text="Attach PDF" />
 
 
