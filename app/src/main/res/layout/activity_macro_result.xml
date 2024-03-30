@@ -112,20 +112,40 @@
         android:id="@+id/annotation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="70dp"
-        android:text="Annotation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="85dp"
+        android:layout_marginBottom="25dp"
+        android:text="Add Annotation"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toStartOf="@+id/annotationShow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graph"
         tools:ignore="MissingConstraints" />
 
-    <ListView android:id="@android:id/list"
+        <ListView
+        android:id="@android:id/list"
+        android:layout_width="410dp"
+        android:layout_height="729dp"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/annotationShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="28dp"
+        android:text="Show Annotation"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/graph"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
