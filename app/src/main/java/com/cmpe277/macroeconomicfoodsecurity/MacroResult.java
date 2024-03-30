@@ -98,6 +98,8 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
         graph = (GraphView) findViewById(R.id.graph);
         graph.setVisibility(View.VISIBLE);
         graph.onDataChanged(true,true);
+        graph.getGridLabelRenderer().setPadding(60);
+
 
         controller = new DBController(this);
 
