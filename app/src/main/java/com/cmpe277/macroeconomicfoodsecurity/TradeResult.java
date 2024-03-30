@@ -7,6 +7,7 @@ import com.jjoe64.graphview.GraphView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -108,7 +109,7 @@ public class TradeResult extends AppCompatActivity implements AdapterView.OnItem
             DataPoint[] dataPoints_in = new DataPoint[myList.size()];
             DataPoint[] dataPoints_out = new DataPoint[myList.size()];
             DataPoint[] dataPoints_net = new DataPoint[myList.size()];
-            dataPoints_reserve[0] = init;
+//            dataPoints_reserve[0] = init;
             try {
                 Double max_in =Double.MIN_VALUE;
                 Double max_out =Double.MIN_VALUE;
@@ -137,7 +138,7 @@ public class TradeResult extends AppCompatActivity implements AdapterView.OnItem
                         }
                     }
                     System.out.println("Max value of y "+max_in);
-                    if(reserves.equalsIgnoreCase("Yes")){
+                    if(totalDebt.equalsIgnoreCase("Yes")){
                         Double x = Double.valueOf(myList.get(i).get("a"));
                         Double y = Double.valueOf(myList.get(i).get("l"));
                         DataPoint dp = new DataPoint(x, y);
@@ -147,7 +148,7 @@ public class TradeResult extends AppCompatActivity implements AdapterView.OnItem
                             max_out = y;
                         }
                     }
-                    if(gni.equalsIgnoreCase("Yes")){
+                    if(gni_curr.equalsIgnoreCase("Yes")){
                         Double x = Double.valueOf(myList.get(i).get("a"));
                         Double y = Double.valueOf(myList.get(i).get("m"));
                         DataPoint dp = new DataPoint(x, y);
@@ -160,9 +161,32 @@ public class TradeResult extends AppCompatActivity implements AdapterView.OnItem
 
                     i++;
                 }
+                if(dataPoints_reserve[0]!=null){
+                    LineGraphSeries<DataPoint> series_gdp = new LineGraphSeries<>(dataPoints_reserve);
+                    graph.addSeries(series_gdp);
+                }
 
-                LineGraphSeries<DataPoint> series_gdp = new LineGraphSeries<>(dataPoints_reserve);
-                graph.addSeries(series_gdp);
+                if(dataPoints_in[0]!=null){
+                    LineGraphSeries<DataPoint> series_in = new LineGraphSeries<>(dataPoints_in);
+                    graph.addSeries(series_in);
+                    series_in.setColor(Color.RED);
+                }
+
+                if(dataPoints_out[0]!=null){
+                    LineGraphSeries<DataPoint> series_out = new LineGraphSeries<>(dataPoints_out);
+                    graph.addSeries(series_out);
+                    series_out.setColor(Color.GREEN);
+                }
+                if(dataPoints_net[0]!=null){
+                    LineGraphSeries<DataPoint> series_net = new LineGraphSeries<>(dataPoints_net);
+                    graph.addSeries(series_net);
+                    series_net.setColor(Color.YELLOW);
+                }
+
+
+
+
+
 
             } catch (IllegalArgumentException e) {
                 Toast.makeText(TradeResult.this, e.getMessage(), Toast.LENGTH_LONG).show();

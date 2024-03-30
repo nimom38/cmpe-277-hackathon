@@ -16,7 +16,7 @@
         android:title="Trade" android:icon="@drawable/trade_alt"/>
 
     <item android:id="@+id/chatbot"
-        android:title="ChatAI" android:icon="@drawable/trade_alt"/>
+        android:title="ChatAI" android:icon="@drawable/gpt"/>
 
 
 </menu>

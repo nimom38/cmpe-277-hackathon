@@ -114,11 +114,14 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
             DataPoint[] dataPoints_in = new DataPoint[myList.size()];
             DataPoint[] dataPoints_out = new DataPoint[myList.size()];
             DataPoint[] dataPoints_net = new DataPoint[myList.size()];
-            dataPoints_gdp[0] = init;
+//            dataPoints_gdp[0] = init;
             try {
                 Double max_in =Double.MIN_VALUE;
                 Double max_out =Double.MIN_VALUE;
                 Double max_net =Double.MIN_VALUE;
+                Double max_gdp =Double.MIN_VALUE;
+                Double max_total = Double.MIN_VALUE;;
+
 
                 while (i < myList.size()) {
                         System.out.println("MyGDP "+gdp);
@@ -131,6 +134,9 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
                         Double y = Double.valueOf(myList.get(i).get("b"));
                         DataPoint dp = new DataPoint(x, y);
                         dataPoints_gdp[i] = dp;
+                        if(y>max_total){
+                            max_total = y;
+                        }
                     }
                     if(fdiinflows.equalsIgnoreCase("Yes")){
                         System.out.println("My In flow INSIDE "+fdiinflows);
@@ -144,57 +150,78 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
                         DataPoint dp = new DataPoint(x, y*100000000);
                         dataPoints_in[i] = dp;
 
+                        if(y>max_total){
+                            max_total = y;
+                        }
                         if(y>max_in){
                             max_in = y;
                         }
                     }
                     System.out.println("Max value of y "+max_in);
-                    if(gdp.equalsIgnoreCase("Yes")){
+                    if(fdioutflows.equalsIgnoreCase("Yes")){
                         Double x = Double.valueOf(myList.get(i).get("a"));
                         Double y = Double.valueOf(myList.get(i).get("d"));
                         DataPoint dp = new DataPoint(x, y);
                         dataPoints_out[i] = dp;
 
-                        if(y>max_out){
-                            max_out = y;
+                        if(y>max_total){
+                            max_total = y;
                         }
                     }
-                    if(fdiinflows.equalsIgnoreCase("Yes")){
+                    if(ieflow.equalsIgnoreCase("Yes")){
                         Double x = Double.valueOf(myList.get(i).get("a"));
                         Double y = Double.valueOf(myList.get(i).get("e"));
                         DataPoint dp = new DataPoint(x, y);
                         dataPoints_net[i] = dp;
 
-                        if(y>max_net){
-                            max_net = y;
+                        if(y>max_total){
+                            max_total = y;
                         }
                     }
 
                     i++;
                 }
+//
+//                LineGraphSeries<DataPoint> series_gdp = new LineGraphSeries<>(dataPoints_gdp);
+//                graph.addSeries(series_gdp);
 
-                LineGraphSeries<DataPoint> series_gdp = new LineGraphSeries<>(dataPoints_gdp);
-                graph.addSeries(series_gdp);
+                if(dataPoints_gdp[0]!=null){
+                    LineGraphSeries<DataPoint> series_gdp = new LineGraphSeries<>(dataPoints_gdp);
+                    graph.addSeries(series_gdp);
+//                    graph.getSecondScale().setMinY(0);
+//                    graph.getSecondScale().setMaxY(max_total);
+//                    series_gdp.setColor(Color.RED);
+                }
 
-                LineGraphSeries<DataPoint> series_in = new LineGraphSeries<>(dataPoints_in);
-                graph.getSecondScale().addSeries(series_in);
-                graph.getSecondScale().setMinY(0);
-                graph.getSecondScale().setMaxY(100);
-                series_in.setColor(Color.RED);
-
-                LineGraphSeries<DataPoint> series_out= new LineGraphSeries<>(dataPoints_out);
-                graph.getSecondScale().addSeries(series_out);
-
-                graph.getSecondScale().setMinY(0);
-                graph.getSecondScale().setMaxY(max_out);
-                series_in.setColor(Color.GREEN);
+                if(dataPoints_in[0]!=null){
+                    LineGraphSeries<DataPoint> series_in = new LineGraphSeries<>(dataPoints_in);
+                    graph.addSeries(series_in);
+//                    graph.getSecondScale().setMinY(0);
+//                    graph.getSecondScale().setMaxY(max_in);
+                    series_in.setColor(Color.RED);
+                }
 
 
-                LineGraphSeries<DataPoint> series_net = new LineGraphSeries<>(dataPoints_net);
-                graph.getSecondScale().addSeries(series_net);
-                graph.getSecondScale().setMinY(0);
-                graph.getSecondScale().setMaxY(max_in);
-                series_in.setColor(Color.YELLOW);
+                if(dataPoints_out[0] != null){
+                    LineGraphSeries<DataPoint> series_out= new LineGraphSeries<>(dataPoints_out);
+                    graph.addSeries(series_out);
+
+//                    graph.getSecondScale().setMinY(0);
+//                    graph.getSecondScale().setMaxY(max_total);
+                    series_out.setColor(Color.GREEN);
+                }
+
+                if(dataPoints_net[0] != null){
+                    LineGraphSeries<DataPoint> series_net = new LineGraphSeries<>(dataPoints_net);
+                    graph.addSeries(series_net);
+//                    graph.getSecondScale().setMinY(0);
+//                    graph.getSecondScale().setMaxY(max_total);
+                    series_net.setColor(Color.YELLOW);
+                }
+
+
+
+//                graph.onDataChanged(true, true);
 
             } catch (IllegalArgumentException e) {
                 Toast.makeText(MacroResult.this, e.getMessage(), Toast.LENGTH_LONG).show();
