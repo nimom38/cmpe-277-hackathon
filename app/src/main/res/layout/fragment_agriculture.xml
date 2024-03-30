@@ -6,23 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".agriculture">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        app:srcCompat="@drawable/geeksquad"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-1dp"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="40dp"
-        android:text="Agriculture Dashboard"
+        android:layout_width="335dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="16dp"
+        android:text="Macroeconomic Researcher Food Security Time Series Dashboard"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#380342"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinner_country"
         android:layout_width="247dp"
-        android:layout_height="24dp"
+        android:layout_height="48dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="40dp"
         android:foregroundTint="#FFFFFF"
@@ -32,36 +41,36 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_width="138dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="124dp"
         android:layout_marginTop="112dp"
         android:fontFamily="monospace"
         android:foregroundTint="#014A04"
-        android:text="Agriculture"
-        android:textColor="#F41717"
-        android:textSize="16sp"
+        android:text="AGRICULTURE"
+        android:textColor="#8B41CC"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <CheckBox
         android:id="@+id/CGDP"
-        android:layout_width="133dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:onClick="onCheckboxClicked"
-        android:text="Contribution GDP"
+        android:text="Contribution To GDP"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <CheckBox
         android:id="@+id/credit"
-        android:layout_width="131dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="40dp"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:onClick="onCheckboxClicked"
         android:text="Credit"
@@ -70,33 +79,22 @@
 
     <CheckBox
         android:id="@+id/fert"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:onClick="onCheckboxClicked"
         android:text="Fertilizers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/credit" />
 
-    <!--    <Button-->
-    <!--        android:id="@+id/Show"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="24dp"-->
-    <!--        android:layout_marginTop="24dp"-->
-    <!--        android:text="Button"-->
-    <!--        android:onClick="showGraph"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@+id/IE_Flows" />-->
-
     <CheckBox
         android:id="@+id/fert_prod"
-        android:layout_width="135dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="sans-serif-black"
         android:onClick="onCheckboxClicked"
         android:text="Fertilizers Production"
@@ -107,14 +105,25 @@
         android:id="@+id/agriShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/teal_700"
         android:onClick="showData"
-        android:text="Display"
+        android:text="SHOW"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintVertical_bias="0.831" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

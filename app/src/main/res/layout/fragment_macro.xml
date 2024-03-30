@@ -8,21 +8,35 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="40dp"
-        android:text="MacroEconomic Dashboard"
+        android:layout_width="335dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="16dp"
+        android:text="Macroeconomic Researcher Food Security Time Series Dashboard"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#380342"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="116dp"
+        android:fontFamily="monospace"
+        android:foregroundTint="#E91E63"
+        android:text="MACROECONOIC (USD)"
+        android:textColor="#8E3E9C"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Spinner
         android:id="@+id/spinner_country"
         android:layout_width="247dp"
-        android:layout_height="24dp"
+        android:layout_height="48dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="40dp"
         android:foregroundTint="#FFFFFF"
@@ -30,71 +44,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="112dp"
-        android:fontFamily="monospace"
-        android:foregroundTint="#E91E63"
-        android:text="Macroeconomic (USD)"
-        android:textColor="#E91E63"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
     <CheckBox
         android:id="@+id/GDP"
-        android:layout_width="133dp"
-        android:layout_height="41dp"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-black"
         android:onClick="onCheckboxClicked"
-        android:text="GDP"
+        android:text="GDP (USD)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <CheckBox
         android:id="@+id/FDI_inflows"
-        android:layout_width="131dp"
-        android:layout_height="41dp"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="40dp"
         android:fontFamily="sans-serif-black"
         android:onClick="onCheckboxClicked"
-        android:text="FDI Inflows"
+        android:text="FDI Inflows (USD)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GDP" />
 
     <CheckBox
         android:id="@+id/FDI_Outflows"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-black"
         android:onClick="onCheckboxClicked"
-        android:text="FDI Outflows"
+        android:text="FDI Outflows (USD)"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/FDI_inflows" />
 
-    <!--    <Button-->
-<!--        android:id="@+id/Show"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="24dp"-->
-<!--        android:layout_marginTop="24dp"-->
-<!--        android:text="Button"-->
-<!--        android:onClick="showGraph"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/IE_Flows" />-->
-
     <CheckBox
         android:id="@+id/IE_Flows"
-        android:layout_width="135dp"
-        android:layout_height="39dp"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-black"
@@ -107,14 +96,49 @@
         android:id="@+id/macroShow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/teal_700"
         android:onClick="showMacroData"
-        android:text="Display"
+        android:text="SHOW"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintVertical_bias="0.841" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-201dp"
+        tools:layout_editor_absoluteY="-16dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:backgroundTint="@color/teal_200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_menu" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="590dp"
+        android:src="@drawable/geeksquad"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
