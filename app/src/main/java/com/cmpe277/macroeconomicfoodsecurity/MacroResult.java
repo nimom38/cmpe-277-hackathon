@@ -2,10 +2,15 @@ package com.cmpe277.macroeconomicfoodsecurity;
 
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.GraphView;
+
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +35,8 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
     EditText startYearEd;
     EditText endYearEd;
     Button apply;
+    Button annotation;
+    Button annotationShow;
 
     String country="";
     String fromYear="";
@@ -38,6 +45,10 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
     String fdiinflows="";
     String fdioutflows="";
     String ieflow="";
+
+    private static final String SHARED_PREFS_KEY = "notes-macro";
+
+    private EditText noteEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +72,14 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
 
         apply = (Button) findViewById(R.id.apply);
         apply.setOnClickListener(this);
+
+        annotation = (Button) findViewById(R.id.annotation);
+        annotationShow = (Button) findViewById(R.id.annotationShow);
+        annotation.setOnClickListener(this);
+        annotationShow.setOnClickListener(this);
+
+
+
         Spinner spinnerLanguages = findViewById(R.id.spinner_country);
         ArrayAdapter adapter = new ArrayAdapter(
                 this,
@@ -73,6 +92,7 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
 
        startYearEd =  (EditText) findViewById(R.id.Start_year);
        endYearEd =  (EditText) findViewById(R.id.End_year);
+
 
 
         graph = (GraphView) findViewById(R.id.graph);
@@ -212,10 +232,114 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
     @Override
     public void onClick(View view) {
 
-        String fromYear = startYearEd.getText().toString();
-        String toYear = endYearEd.getText().toString();
-        ArrayList<HashMap<String, String>> myListApply;
-        myListApply = controller.getAllProducts(country, fromYear, toYear, gdp, fdiinflows, fdioutflows, ieflow);
-        loadGraph(myListApply);
+        switch (view.getId()){
+            case R.id.apply:
+                String fromYear = startYearEd.getText().toString();
+                String toYear = endYearEd.getText().toString();
+                ArrayList<HashMap<String, String>> myListApply;
+                myListApply = controller.getAllProducts(country, fromYear, toYear, gdp, fdiinflows, fdioutflows, ieflow);
+                loadGraph(myListApply);
+                break;
+            case R.id.annotation:
+                showNoteDialog();
+//                String note = noteEditText.getText().toString().trim();
+//                saveNote(note);
+                break;
+            case R.id.annotationShow:
+                retrieveNotes();
+                break;
+
+
+        }
+
+
+    }
+
+//    private void saveNote() {
+//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//        String note = noteEditText.getText().toString().trim();
+//        if (!note.isEmpty()) {
+//            // Generate a unique key for each note by using the current timestamp
+//            String key = String.valueOf(System.currentTimeMillis());
+//            editor.putString(key, note);
+//            editor.apply();
+//            Toast.makeText(this, "Note saved successfully", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, "Please enter a note", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+//    private void retrieveNotes() {
+//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
+//        StringBuilder notes = new StringBuilder();
+//
+//        for (String key : sharedPreferences.getAll().keySet()) {
+//            String note = sharedPreferences.getString(key, "");
+//            notes.append(note).append("\n");
+//        }
+//
+//        if (notes.length() > 0) {
+//            Toast.makeText(this, "Notes:\n" + notes.toString(), Toast.LENGTH_LONG).show();
+//        } else {
+//            Toast.makeText(this, "No notes found", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+
+
+    private void showNoteDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_add_note, null);
+        builder.setView(dialogView);
+
+        final EditText noteEditText = dialogView.findViewById(R.id.noteEditText);
+
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            String note = noteEditText.getText().toString().trim();
+            if (!note.isEmpty()) {
+                saveNote(note);
+            } else {
+                Toast.makeText(this, "Please enter a note", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void saveNote(String note) {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Generate a unique key for each note by using the current timestamp
+        String key = String.valueOf(System.currentTimeMillis());
+        editor.putString(key, note);
+        editor.apply();
+        Toast.makeText(this, "Note saved successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    private void retrieveNotes() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS_KEY, Context.MODE_PRIVATE);
+        StringBuilder notes = new StringBuilder();
+
+        for (String key : sharedPreferences.getAll().keySet()) {
+            String note = sharedPreferences.getString(key, "");
+            notes.append(note).append("\n");
+        }
+
+        if (notes.length() > 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Saved Notes");
+            builder.setMessage(notes.toString());
+            builder.setPositiveButton("OK", null);
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        } else {
+            Toast.makeText(this, "No notes found", Toast.LENGTH_SHORT).show();
+        }
     }
 }
