@@ -73,6 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -82,6 +83,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener  {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         addToDatabase = (Button) rootView.findViewById(R.id.saveToDB);
         addToDatabase.setOnClickListener(this);
+        addToDatabase.setVisibility(View.GONE);
 
          reseacher = (ImageButton) rootView.findViewById(R.id.user);
         reseacher.setOnClickListener(this);
