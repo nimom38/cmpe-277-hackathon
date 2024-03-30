@@ -108,7 +108,7 @@ public class MacroResult extends ListActivity  implements AdapterView.OnItemSele
     private void loadGraph(ArrayList<HashMap<String, String>> myList) {
         int i = 0;
         if (myList.size() != 0) {
-
+            graph.removeAllSeries();
             DataPoint init = new DataPoint(0, 1);
             DataPoint[] dataPoints_gdp = new DataPoint[myList.size()];
             DataPoint[] dataPoints_in = new DataPoint[myList.size()];
